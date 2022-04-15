@@ -4,9 +4,50 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ValuteMVVMPractice"
+        xmlns:customcommand="clr-namespace:ValuteMVVMPractice.Miscellaneous"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="Валюты" Height="450" Width="800">
+    <Window.CommandBindings>
+        <CommandBinding Command="ApplicationCommands.Close" x:Name="Close"
+                        Executed="Close_Executed"
+                        CanExecute="Close_CanExecute"/>
+        <CommandBinding Command="{x:Static customcommand:CustomCommands.MoveToCurrencyTable}"
+                        CanExecute="MoveCurTableCommand_CanExecute"
+                        Executed="MoveCurTableCommand_Executed"/>
+        <CommandBinding Command="{x:Static customcommand:CustomCommands.MoveToGraph}" x:Name="MoveToGraph"
+                        CanExecute="MoveToGraph_CanExecute"
+                        Executed="MoveToGraph_Executed"/>
+        <CommandBinding Command="{x:Static customcommand:CustomCommands.MoveToConverter}" x:Name="MoveToConverter"
+                        CanExecute="MoveToConverter_CanExecute"
+                        Executed="MoveToConverter_Executed"/>
+        <CommandBinding Command="{x:Static customcommand:CustomCommands.MoveToSpravka}" x:Name="MoveToSpravka"
+                        CanExecute="MoveToSpravka_CanExecute"
+                        Executed="MoveToSpravka_Executed"/>
+
+
+    </Window.CommandBindings>
+    <Window.InputBindings>
+        <KeyBinding Command="ApplicationCommands.Close" Modifiers="Alt" Key="F4"/>
+        <KeyBinding Command="ApplicationCommands.Close" Key="Esc"/>
+    </Window.InputBindings>
+
     <Grid>
-        
+        <Grid.RowDefinitions>
+            <RowDefinition Height="25"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Menu Grid.Row="0">
+            <MenuItem Header="Страницы">
+                <MenuItem Header="Таблица валют" Command="{x:Static customcommand:CustomCommands.MoveToCurrencyTable}">
+                </MenuItem>
+                <MenuItem Header="График валют" Command="{x:Static customcommand:CustomCommands.MoveToGraph}">
+                </MenuItem>
+                <MenuItem Header="Конвертер валют" Command="{x:Static customcommand:CustomCommands.MoveToConverter}"></MenuItem>
+                <Separator></Separator>
+                <MenuItem Header="Выход" Command="ApplicationCommands.Close" InputGestureText="Esc"></MenuItem>
+            </MenuItem>
+            <MenuItem Header="Справка" Command="{x:Static customcommand:CustomCommands.MoveToSpravka}"></MenuItem>
+        </Menu>
+        <Frame x:Name="MainFrame" Grid.Row="1" NavigationUIVisibility="Hidden"></Frame>
     </Grid>
 </Window>
