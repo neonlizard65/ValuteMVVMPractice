@@ -42,7 +42,6 @@ namespace ValuteMVVMPractice
             e.CanExecute = true;
         }
 
-
         //Навигация Таблица
         private void MoveCurTableCommand_CanExecute(object sender, CanExecuteRoutedEventArgs e)
         {
@@ -72,7 +71,6 @@ namespace ValuteMVVMPractice
                 e.CanExecute = false;
             }
         }
-
         private void MoveToGraph_Executed(object sender, ExecutedRoutedEventArgs e)
         {
             MainFrame.Navigate(new GraphPage());
@@ -90,7 +88,6 @@ namespace ValuteMVVMPractice
                 e.CanExecute = false;
             }
         }
-
         private void MoveToConverter_Executed(object sender, ExecutedRoutedEventArgs e)
         {
             MainFrame.Navigate(new ConverterPage());
@@ -107,10 +104,7 @@ namespace ValuteMVVMPractice
             {
                 e.CanExecute = false;
             }
-            
-
         }
-
         private void MoveToSpravka_Executed(object sender, ExecutedRoutedEventArgs e)
         {
             MainFrame.Navigate(new SpravkaPage());

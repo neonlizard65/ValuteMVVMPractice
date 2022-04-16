@@ -10,7 +10,6 @@ namespace ValuteMVVMPractice.Miscellaneous
 {
     public static class CustomCommands
     {
-        public static RoutedCommand ShowMessage { get; set; }
         public static RoutedCommand MoveToCurrencyTable { get; set; }
         public static RoutedCommand MoveToGraph { get; set; }
         public static RoutedCommand MoveToConverter { get; set; }
@@ -24,15 +23,15 @@ namespace ValuteMVVMPractice.Miscellaneous
             MoveToCurrencyTable = new RoutedCommand("MoveToCurrencyTable", typeof(CustomCommands), inputs);
 
             inputs = new InputGestureCollection();
-            inputs.Add(new KeyGesture(Key.D1, ModifierKeys.Control, "Ctrl+2"));
+            inputs.Add(new KeyGesture(Key.D2, ModifierKeys.Control, "Ctrl+2"));
             MoveToGraph = new RoutedCommand("MoveToGraph", typeof(CustomCommands), inputs);
 
             inputs = new InputGestureCollection();
-            inputs.Add(new KeyGesture(Key.D1, ModifierKeys.Control, "Ctrl+3"));
+            inputs.Add(new KeyGesture(Key.D3, ModifierKeys.Control, "Ctrl+3"));
             MoveToConverter = new RoutedCommand("MoveToConverter", typeof(CustomCommands), inputs);
 
             inputs = new InputGestureCollection();
-            inputs.Add(new KeyGesture(Key.D1, ModifierKeys.Control, "Ctrl+4"));
+            inputs.Add(new KeyGesture(Key.D4, ModifierKeys.Control, "Ctrl+4"));
             MoveToSpravka = new RoutedCommand("MoveToSpravka", typeof(CustomCommands), inputs);
         }
 

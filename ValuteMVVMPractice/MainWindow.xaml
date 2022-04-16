@@ -29,11 +29,12 @@
     <Window.InputBindings>
         <KeyBinding Command="ApplicationCommands.Close" Modifiers="Alt" Key="F4"/>
         <KeyBinding Command="ApplicationCommands.Close" Key="Esc"/>
+
     </Window.InputBindings>
 
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="25"/>
+            <RowDefinition Height="20"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
         <Menu Grid.Row="0">
