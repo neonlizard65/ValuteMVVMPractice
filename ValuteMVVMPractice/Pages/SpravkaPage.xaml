@@ -9,6 +9,6 @@
       Title="SpravkaPage">
 
     <Grid>
-        
+        <TextBlock Text="{Binding Valute[0].Nominal}"/>
     </Grid>
 </Page>

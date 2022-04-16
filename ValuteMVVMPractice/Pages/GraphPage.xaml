@@ -4,11 +4,28 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:ValuteMVVMPractice.Pages"
+      xmlns:oxy="http://oxyplot.org/wpf"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
       Title="GraphPage">
 
     <Grid>
-        
+        <StackPanel Orientation="Vertical">
+            <StackPanel Orientation="Vertical">
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Text="Выберите валюту:"/>
+                    <ComboBox x:Name="ValuteBox"></ComboBox>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal">
+                    <DatePicker Text="{Binding Date1}"></DatePicker>
+                    <DatePicker Text="{Binding Date2}"></DatePicker>
+                </StackPanel>
+            </StackPanel>
+
+            <oxy:PlotView>
+                
+            </oxy:PlotView>
+        </StackPanel>
+      
     </Grid>
 </Page>

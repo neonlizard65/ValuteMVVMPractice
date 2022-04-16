@@ -24,8 +24,13 @@ namespace ValuteMVVMPractice.Pages
         public CurrencyTablePage()
         {
             InitializeComponent();
-            ValCursViewModel cvm = new ValCursViewModel();
-            DataContext = cvm;
+            DataContext = MainWindow.cvm;
+        }
+
+        private void CurrencyTable_Unloaded(object sender, RoutedEventArgs e)
+        {
+            var grid = (DataGrid)sender;
+            grid.CommitEdit(DataGridEditingUnit.Row, true);
         }
     }
 }

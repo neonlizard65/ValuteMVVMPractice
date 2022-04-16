@@ -6,51 +6,81 @@ using System.Threading.Tasks;
 
 namespace ValuteMVVMPractice.Models
 {
-    public class Currency
+    public class DynamicCurrency
     {
 
-        //Автогенерируемый класс валют, получаемый из файла XML. Через кострукторы проходит десериализация.  
-
-
+        // NOTE: Generated code may require at least .NET Framework 4.5 or .NET Core/Standard 2.0.
         /// <remarks/>
         [System.SerializableAttribute()]
         [System.ComponentModel.DesignerCategoryAttribute("code")]
         [System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true)]
         [System.Xml.Serialization.XmlRootAttribute(Namespace = "", IsNullable = false)]
         public partial class ValCurs
-        {   //Класс списка валют, с датой получения
+        {
 
-            private ValCursValute[] valuteField;
+            private ValCursRecord[] recordField;
 
-            private string dateField;
+            private string idField;
+
+            private string dateRange1Field;
+
+            private string dateRange2Field;
 
             private string nameField;
 
             /// <remarks/>
-            [System.Xml.Serialization.XmlElementAttribute("Valute")]
-            public ValCursValute[] Valute
+            [System.Xml.Serialization.XmlElementAttribute("Record")]
+            public ValCursRecord[] Record
             {
                 get
                 {
-                    return this.valuteField;
+                    return this.recordField;
                 }
                 set
                 {
-                    this.valuteField = value;
+                    this.recordField = value;
                 }
             }
 
             /// <remarks/>
             [System.Xml.Serialization.XmlAttributeAttribute()]
-            public string Date
+            public string ID
             {
                 get
                 {
-                    return this.dateField;
+                    return this.idField;
                 }
                 set
                 {
-                    this.dateField = value;
+                    this.idField = value;
+                }
+            }
+
+            /// <remarks/>
+            [System.Xml.Serialization.XmlAttributeAttribute()]
+            public string DateRange1
+            {
+                get
+                {
+                    return this.dateRange1Field;
+                }
+                set
+                {
+                    this.dateRange1Field = value;
+                }
+            }
+
+            /// <remarks/>
+            [System.Xml.Serialization.XmlAttributeAttribute()]
+            public string DateRange2
+            {
+                get
+                {
+                    return this.dateRange2Field;
+                }
+                set
+                {
+                    this.dateRange2Field = value;
                 }
             }
 
@@ -73,49 +103,19 @@ namespace ValuteMVVMPractice.Models
         [System.SerializableAttribute()]
         [System.ComponentModel.DesignerCategoryAttribute("code")]
         [System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true)]
-        public partial class ValCursValute
-        {   //Класс каждой индивидуальной валюты
+        public partial class ValCursRecord
+        {
 
-            private ushort numCodeField;
-
-            private string charCodeField;
-
-            private ushort nominalField;
-
-            private string nameField;
+            private byte nominalField;
 
             private string valueField;
+
+            private string dateField;
 
             private string idField;
 
             /// <remarks/>
-            public ushort NumCode
-            {
-                get
-                {
-                    return this.numCodeField;
-                }
-                set
-                {
-                    this.numCodeField = value;
-                }
-            }
-
-            /// <remarks/>
-            public string CharCode
-            {
-                get
-                {
-                    return this.charCodeField;
-                }
-                set
-                {
-                    this.charCodeField = value;
-                }
-            }
-
-            /// <remarks/>
-            public ushort Nominal
+            public byte Nominal
             {
                 get
                 {
@@ -124,19 +124,6 @@ namespace ValuteMVVMPractice.Models
                 set
                 {
                     this.nominalField = value;
-                }
-            }
-
-            /// <remarks/>
-            public string Name
-            {
-                get
-                {
-                    return this.nameField;
-                }
-                set
-                {
-                    this.nameField = value;
                 }
             }
 
@@ -155,7 +142,21 @@ namespace ValuteMVVMPractice.Models
 
             /// <remarks/>
             [System.Xml.Serialization.XmlAttributeAttribute()]
-            public string ID
+            public string Date
+            {
+                get
+                {
+                    return this.dateField;
+                }
+                set
+                {
+                    this.dateField = value;
+                }
+            }
+
+            /// <remarks/>
+            [System.Xml.Serialization.XmlAttributeAttribute()]
+            public string Id
             {
                 get
                 {
@@ -167,6 +168,7 @@ namespace ValuteMVVMPractice.Models
                 }
             }
         }
+
 
     }
 }

@@ -4,4 +4,7 @@
         <Setter Property="Foreground" Value="White"/>
         <Setter Property="FontSize" Value="18"/>
     </Style>
+    <Style TargetType="DataGridCell">
+        <Setter Property="TextBlock.TextAlignment" Value="Center" />
+    </Style>
 </ResourceDictionary>

@@ -13,6 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using ValuteMVVMPractice.Pages;
+using ValuteMVVMPractice.ViewModels;
 
 namespace ValuteMVVMPractice
 {
@@ -21,9 +22,11 @@ namespace ValuteMVVMPractice
     /// </summary>
     public partial class MainWindow : Window
     {
+        public static ValCursViewModel cvm { get; set; }
         public MainWindow()
         {
             InitializeComponent();
+            cvm = new ValCursViewModel();
             MainFrame.Navigate(new CurrencyTablePage());
         }
 

@@ -10,9 +10,15 @@
 
     <Grid>
         <StackPanel>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                <TextBlock Text="На состояние: " FontSize="24"/>
+                <DatePicker SelectedDate="{Binding Date}" FontSize="24"></DatePicker>
+            </StackPanel>
+          
             <ScrollViewer VerticalScrollBarVisibility="Auto" Background="#ED6A5A">
-                <DataGrid AutoGenerateColumns="False" CanUserAddRows="False" CanUserDeleteRows="False" x:Name="CurrencyTable" ItemsSource="{Binding Path=Valute}" Height="392" VerticalAlignment="Stretch"
-                          RowHeight="25" AlternatingRowBackground="#5D576B" RowBackground="#ED6A5A" Foreground="White" Background="#5D576B" BorderThickness="0">
+                <DataGrid AutoGenerateColumns="False" CanUserAddRows="False" CanUserDeleteRows="False" x:Name="CurrencyTable" ItemsSource="{Binding Path=Valute}" Height="368" VerticalAlignment="Stretch"
+                          RowHeight="25" AlternatingRowBackground="#5D576B" RowBackground="#ED6A5A" Foreground="White" Background="#5D576B" BorderThickness="0" GridLinesVisibility="None"
+                          Unloaded="CurrencyTable_Unloaded">
                     <DataGrid.Resources>
                         <Style TargetType="{x:Type DataGridColumnHeader}">
                             <Setter Property="BorderThickness" Value="0"/>
@@ -54,7 +60,7 @@
                                 </Style>
                             </DataGridTextColumn.HeaderStyle>
                         </DataGridTextColumn>
-                        <DataGridTextColumn Binding="{Binding Name}" Width="5*">
+                        <DataGridTextColumn Binding="{Binding Name}" Width="4*">
                             <DataGridTextColumn.Header>
                                 <TextBlock Text="Название" Style="{StaticResource DataGridHeaderText}"/>
                             </DataGridTextColumn.Header>

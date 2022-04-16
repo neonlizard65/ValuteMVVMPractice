@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.IO;
 using System.Linq;
+using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Serialization;
@@ -11,24 +12,31 @@ using static ValuteMVVMPractice.Models.Currency;
 
 namespace ValuteMVVMPractice.ViewModels
 {
+    //ViewModel хранит данные, готовые к передаче на View. Будет создаваться объект этого класса.
     public class ValCursViewModel : INotifyPropertyChanged
-    {
+    {   //Класс списка валют, используется для таблицы валют
+
         private ValCurs _valCurs;
 
-
+        //Событие изменения свойства.
         public event PropertyChangedEventHandler PropertyChanged;
         protected virtual void OnPropertyChanged(string propertyName)
         {
             if (PropertyChanged != null)
             {
                 PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+                if (propertyName == "Date")
+                {   //При изменении даты
+                    _valCurs = GetXML(Date);
+                    Valute = _valCurs.Valute; //все валюты
+                    name = _valCurs.name; //не используется
+                }
             }
         }
 
         public ValCursViewModel()
-        {
-            XmlSerializer xmlSerializer = new XmlSerializer(typeof(ValCurs));
-            _valCurs = (ValCurs)xmlSerializer.Deserialize(new StreamReader("XML_daily.xml", Encoding.Default));
+        {   
+            _valCurs = GetXML();
             Valute = _valCurs.Valute;
             Date = Convert.ToDateTime(_valCurs.Date);
             name = _valCurs.name;
@@ -64,9 +72,25 @@ namespace ValuteMVVMPractice.ViewModels
             }
         }
 
-     
+        private ValCurs GetXML()
+        {
+            XmlSerializer xmlSerializer = new XmlSerializer(typeof(ValCurs));
+            HttpClient client = new HttpClient();
+            var stream = client.GetAsync("https://cbr.ru/scripts/XML_daily.asp").Result.Content.ReadAsStreamAsync().Result;
+            return (ValCurs)xmlSerializer.Deserialize(new StreamReader(stream, Encoding.Default));
+        }
+
+        private ValCurs GetXML(DateTime date)
+        {
+            XmlSerializer xmlSerializer = new XmlSerializer(typeof(ValCurs));
+            HttpClient client = new HttpClient();
+            var stream = client.GetAsync("https://cbr.ru/scripts/XML_daily.asp?date_req=" + String.Format("{0:dd/MM/yyyy}", date)).Result.Content.ReadAsStreamAsync().Result;
+            return (ValCurs)xmlSerializer.Deserialize(new StreamReader(stream, Encoding.Default));
+        }
     }
 
+
+    //Создан на перспективу, но использоваться скорее всего не будет (нет смысла редактировать валюту индивидуально, а также все объекты уже в массиве класса выше)
     public class ValCursValuteViewModel : INotifyPropertyChanged
     {
         private ValCursValute _valCursValute;
