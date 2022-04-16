@@ -87,6 +87,7 @@ namespace ValuteMVVMPractice.ViewModels
             var stream = client.GetAsync("https://cbr.ru/scripts/XML_daily.asp?date_req=" + String.Format("{0:dd/MM/yyyy}", date)).Result.Content.ReadAsStreamAsync().Result;
             return (ValCurs)xmlSerializer.Deserialize(new StreamReader(stream, Encoding.Default));
         }
+
     }
 
 

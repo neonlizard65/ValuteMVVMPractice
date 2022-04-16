@@ -8,23 +8,21 @@
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
       Title="GraphPage">
-
     <Grid>
         <StackPanel Orientation="Vertical">
             <StackPanel Orientation="Vertical">
                 <StackPanel Orientation="Horizontal">
                     <TextBlock Text="Выберите валюту:"/>
-                    <ComboBox x:Name="ValuteBox"></ComboBox>
+                    <ComboBox x:Name="ValuteBox" SelectedValue="{Binding ID}" SelectionChanged="ValuteBox_SelectionChanged"></ComboBox>
                 </StackPanel>
                 <StackPanel Orientation="Horizontal">
-                    <DatePicker Text="{Binding Date1}"></DatePicker>
-                    <DatePicker Text="{Binding Date2}"></DatePicker>
+                    <DatePicker SelectedDate="{Binding DateRange1}" SelectedDateChanged="DatePicker_SelectedDateChanged"></DatePicker>
+                    <DatePicker SelectedDate="{Binding DateRange2}" SelectedDateChanged="DatePicker_SelectedDateChanged"></DatePicker>
                 </StackPanel>
+
+                <oxy:PlotView x:Name="CurrencyPlot" Width="750" Height="300" HorizontalAlignment="Center"></oxy:PlotView>
             </StackPanel>
 
-            <oxy:PlotView>
-                
-            </oxy:PlotView>
         </StackPanel>
       
     </Grid>
