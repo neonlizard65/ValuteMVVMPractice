@@ -6,7 +6,9 @@
         xmlns:local="clr-namespace:ValuteMVVMPractice"
         xmlns:customcommand="clr-namespace:ValuteMVVMPractice.Miscellaneous"
         mc:Ignorable="d"
-        Title="Валюты" Height="450" Width="800">
+        Title="Валюты" Height="470" Width="800"
+        MaxHeight="470" MaxWidth="800"
+        MinHeight="470" MinWidth="800" WindowStartupLocation="CenterOwner" WindowStyle="SingleBorderWindow">
     <Window.CommandBindings>
         <CommandBinding Command="ApplicationCommands.Close" x:Name="Close"
                         Executed="Close_Executed"
@@ -37,7 +39,7 @@
             <RowDefinition Height="20"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
-        <Menu Grid.Row="0">
+        <Menu Grid.Row="0" VerticalAlignment="Top" Background="White">
             <MenuItem Header="Страницы">
                 <MenuItem Header="Таблица валют" Command="{x:Static customcommand:CustomCommands.MoveToCurrencyTable}">
                 </MenuItem>
@@ -48,6 +50,7 @@
                 <MenuItem Header="Выход" Command="ApplicationCommands.Close" InputGestureText="Esc"></MenuItem>
             </MenuItem>
             <MenuItem Header="Справка" Command="{x:Static customcommand:CustomCommands.MoveToSpravka}"></MenuItem>
+            <MenuItem Header="Выход" Command="ApplicationCommands.Close" InputGestureText="Esc"></MenuItem>
         </Menu>
         <Frame x:Name="MainFrame" Grid.Row="1" NavigationUIVisibility="Hidden"></Frame>
     </Grid>

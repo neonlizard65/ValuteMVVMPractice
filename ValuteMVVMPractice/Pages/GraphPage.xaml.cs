@@ -28,7 +28,7 @@ namespace ValuteMVVMPractice.Pages
         public GraphPage()
         {
             InitializeComponent();
-            dvcvm = new DynamicValCursViewModel(Convert.ToDateTime(DateTime.Now.Subtract(new TimeSpan(7,0,0,0)).ToString("dd/MM/yyyy")), Convert.ToDateTime(DateTime.Now.ToString("dd/MM/yyyy")), "R01235"); //По умолчанию доллар
+            dvcvm = new DynamicValCursViewModel(Convert.ToDateTime(DateTime.Now.Subtract(new TimeSpan(30,0,0,0)).ToString("dd/MM/yyyy")), Convert.ToDateTime(DateTime.Now.ToString("dd/MM/yyyy")), "R01235"); //По умолчанию доллар
             DataContext = dvcvm;
             ValuteBox.ItemsSource = MainWindow.cvm.Valute;
             ValuteBox.DisplayMemberPath = "CharCode";
@@ -46,7 +46,14 @@ namespace ValuteMVVMPractice.Pages
 
         private void DatePicker_SelectedDateChanged(object sender, SelectionChangedEventArgs e)
         {
-            CurrencyPlot.Model = dvcvm.plotModel;
+            if (dvcvm.DateRange1 < dvcvm.DateRange2)
+            {
+                CurrencyPlot.Model = dvcvm.plotModel;
+            }
+            else
+            {
+                MessageBox.Show("Дата начала не может быть позже дата окончания", "", MessageBoxButton.OK, MessageBoxImage.Stop);
+            }
 
         }
     }

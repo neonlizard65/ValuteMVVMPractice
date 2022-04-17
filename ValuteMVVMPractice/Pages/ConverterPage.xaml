@@ -9,6 +9,30 @@
       Title="ConverterPage">
 
     <Grid>
-        <TextBox x:Name="Operand1"/>
+        <StackPanel Width="300" VerticalAlignment="Center">
+            <ComboBox x:Name="ValuteBox1" Margin="5" SelectionChanged="ValuteBox1_SelectionChanged">
+                <ComboBox.ItemTemplate>
+                    <DataTemplate>
+                        <TextBlock>
+                            <Run Text="{Binding Name}"></Run>
+                            <Run Text="{Binding CharCode, StringFormat={}({0})}"></Run>
+                        </TextBlock>
+                    </DataTemplate>
+                </ComboBox.ItemTemplate>
+            </ComboBox>
+            <TextBox x:Name="Quantity" Margin="5" PreviewTextInput="Quantity_PreviewTextInput" TextChanged="Quantity_TextChanged"/>
+            <ComboBox x:Name="ValuteBox2"  Margin="5" SelectionChanged="ValuteBox1_SelectionChanged">
+                <ComboBox.ItemTemplate>
+                    <DataTemplate>
+                        <TextBlock>
+                            <Run Text="{Binding Name}"></Run>
+                            <Run Text="{Binding CharCode, StringFormat={}({0})}"></Run>
+                        </TextBlock>
+                    </DataTemplate>
+                </ComboBox.ItemTemplate>
+            </ComboBox>
+            <TextBlock x:Name="AnswerBox" Margin="5"/>
+        </StackPanel>
+    
     </Grid>
 </Page>

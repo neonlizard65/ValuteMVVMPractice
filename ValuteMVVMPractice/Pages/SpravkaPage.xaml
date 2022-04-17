@@ -9,6 +9,7 @@
       Title="SpravkaPage">
 
     <Grid>
-        <TextBlock Text="{Binding Valute[0].Nominal}"/>
+        <TextBlock Text="Вся информация взята с сайта          Центрального банка Российской Федерации" FontSize="36" HorizontalAlignment="Center" VerticalAlignment="Center"
+                   TextWrapping="Wrap"/>
     </Grid>
 </Page>

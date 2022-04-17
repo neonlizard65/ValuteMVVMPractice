@@ -11,13 +11,13 @@
     <Grid>
         <StackPanel Orientation="Vertical">
             <StackPanel Orientation="Vertical">
-                <StackPanel Orientation="Horizontal">
-                    <TextBlock Text="Выберите валюту:"/>
-                    <ComboBox x:Name="ValuteBox" SelectedValue="{Binding ID}" SelectionChanged="ValuteBox_SelectionChanged"></ComboBox>
+                <StackPanel Orientation="Vertical" HorizontalAlignment="Center">
+                    <TextBlock Text="Выберите валюту:" FontSize="22"/>
+                    <ComboBox x:Name="ValuteBox" SelectedValue="{Binding ID}" SelectionChanged="ValuteBox_SelectionChanged" Width="80" Height="40" FontSize="24" Margin="5"></ComboBox>
                 </StackPanel>
-                <StackPanel Orientation="Horizontal">
-                    <DatePicker SelectedDate="{Binding DateRange1}" SelectedDateChanged="DatePicker_SelectedDateChanged"></DatePicker>
-                    <DatePicker SelectedDate="{Binding DateRange2}" SelectedDateChanged="DatePicker_SelectedDateChanged"></DatePicker>
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                    <DatePicker SelectedDate="{Binding DateRange1}" SelectedDateChanged="DatePicker_SelectedDateChanged" Margin="5"></DatePicker>
+                    <DatePicker SelectedDate="{Binding DateRange2}" SelectedDateChanged="DatePicker_SelectedDateChanged" Margin="5"></DatePicker>
                 </StackPanel>
 
                 <oxy:PlotView x:Name="CurrencyPlot" Width="750" Height="300" HorizontalAlignment="Center"></oxy:PlotView>

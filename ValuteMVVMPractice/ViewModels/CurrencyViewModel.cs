@@ -17,6 +17,7 @@ namespace ValuteMVVMPractice.ViewModels
     {   //Класс списка валют, используется для таблицы валют
 
         private ValCurs _valCurs;
+        private ValCursValute[] _valute;
 
         //Событие изменения свойства.
         public event PropertyChangedEventHandler PropertyChanged;
@@ -28,7 +29,13 @@ namespace ValuteMVVMPractice.ViewModels
                 if (propertyName == "Date")
                 {   //При изменении даты
                     _valCurs = GetXML(Date);
-                    Valute = _valCurs.Valute; //все валюты
+                    _valute = _valCurs.Valute;
+                    ValCursValuteViewModel[] valutes = new ValCursValuteViewModel[_valute.Length];
+                    for(int i = 0; i < _valute.Length; i++)
+                    {
+                        valutes[i] = new ValCursValuteViewModel(_valute[i]);
+                    }
+                    Valute = valutes; //все валюты
                     name = _valCurs.name; //не используется
                 }
             }
@@ -37,17 +44,44 @@ namespace ValuteMVVMPractice.ViewModels
         public ValCursViewModel()
         {   
             _valCurs = GetXML();
-            Valute = _valCurs.Valute;
+            _valute = _valCurs.Valute;
+            ValCursValuteViewModel[] valutes = new ValCursValuteViewModel[_valute.Length];
+            for (int i = 0; i < _valute.Length; i++)
+            {
+                valutes[i] = new ValCursValuteViewModel(_valute[i]);
+            }
+            Valute = valutes;
             Date = Convert.ToDateTime(_valCurs.Date);
             name = _valCurs.name;
         }
 
-        public ValCursValute[] Valute
+
+        public ValCursValuteViewModel[] Valute
         {
-            get { return _valCurs.Valute; }
+            get 
+            {
+                ValCursValuteViewModel[] valutes = new ValCursValuteViewModel[_valute.Length];
+                for (int i = 0; i < _valute.Length; i++)
+                {
+                    valutes[i] = new ValCursValuteViewModel(_valute[i]);
+                }
+                return valutes;
+            }
             set
             {
-                _valCurs.Valute = value;
+                for(int i = 0; i < value.Length; i++)
+                {
+                    _valute[i] = new ValCursValute
+                    {
+                        NumCode = value[i].NumCode,
+                        CharCode = value[i].CharCode,
+                        Nominal = value[i].Nominal,
+                        Name = value[i].Name,
+                        Value = value[i].Value.ToString(),
+                        ID = value[i].ID
+                    };
+                        
+                }
                 OnPropertyChanged("Valute");
             }
         }
@@ -76,7 +110,7 @@ namespace ValuteMVVMPractice.ViewModels
         {
             XmlSerializer xmlSerializer = new XmlSerializer(typeof(ValCurs));
             HttpClient client = new HttpClient();
-            var stream = client.GetAsync("https://cbr.ru/scripts/XML_daily.asp").Result.Content.ReadAsStreamAsync().Result;
+            var stream = client.GetStreamAsync("https://cbr.ru/scripts/XML_daily.asp").Result;
             return (ValCurs)xmlSerializer.Deserialize(new StreamReader(stream, Encoding.Default));
         }
 
@@ -84,14 +118,19 @@ namespace ValuteMVVMPractice.ViewModels
         {
             XmlSerializer xmlSerializer = new XmlSerializer(typeof(ValCurs));
             HttpClient client = new HttpClient();
-            var stream = client.GetAsync("https://cbr.ru/scripts/XML_daily.asp?date_req=" + String.Format("{0:dd/MM/yyyy}", date)).Result.Content.ReadAsStreamAsync().Result;
+            var stream = client.GetStreamAsync("https://cbr.ru/scripts/XML_daily.asp?date_req=" + String.Format("{0:dd/MM/yyyy}", date)).Result;
             return (ValCurs)xmlSerializer.Deserialize(new StreamReader(stream, Encoding.Default));
         }
 
+        public decimal GetConversion(decimal quantity, ValCursValuteViewModel val1, ValCursValuteViewModel val2)
+        {
+            var answer = (Convert.ToDecimal(val1.Value) * quantity / val1.Nominal) / (Convert.ToDecimal(val2.Value));
+            return (decimal)answer;
+        }
     }
 
 
-    //Создан на перспективу, но использоваться скорее всего не будет (нет смысла редактировать валюту индивидуально, а также все объекты уже в массиве класса выше)
+
     public class ValCursValuteViewModel : INotifyPropertyChanged
     {
         private ValCursValute _valCursValute;
@@ -105,9 +144,34 @@ namespace ValuteMVVMPractice.ViewModels
             }
         }
 
-        public ValCursValuteViewModel()
-        {
+        public ValCursValuteViewModel(ValCursValute val)
+        {   //Обычный конструкор
+            _valCursValute = val;
+            this.NumCode = val.NumCode;
+            this.CharCode = val.CharCode;
+            this.Nominal = val.Nominal;
+            this.Name = val.Name;
+            this.Value = decimal.Parse(val.Value);
+            this.ID = val.ID;
+        }
 
+        public ValCursValuteViewModel(ushort NumCode, string CharCode, ushort Nominal, string Name, decimal Value, string ID)
+        {   //Конструктор для добавления рубля для конвертации
+            _valCursValute = new ValCursValute()
+            {
+                NumCode = NumCode,
+                CharCode = CharCode,
+                Nominal = Nominal,
+                Name = Name,
+                Value = Value.ToString(),
+                ID = ID
+            };
+            this.NumCode = NumCode;
+            this.CharCode = CharCode;
+            this.Nominal = Nominal;
+            this.Name = Name;
+            this.Value = Value;
+            this.ID = ID;
         }
 
         public ushort NumCode
@@ -190,7 +254,5 @@ namespace ValuteMVVMPractice.ViewModels
 
   
     }
-
-
 
 }

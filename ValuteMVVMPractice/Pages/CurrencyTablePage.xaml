@@ -5,24 +5,23 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:ValuteMVVMPractice.Pages"
       mc:Ignorable="d" 
-      d:DesignHeight="450" d:DesignWidth="800"
+      d:DesignHeight="430" d:DesignWidth="800"
       Title="CurrencyTablePage">
 
     <Grid>
         <StackPanel>
-            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="5">
                 <TextBlock Text="На состояние: " FontSize="24"/>
                 <DatePicker SelectedDate="{Binding Date}" FontSize="24"></DatePicker>
             </StackPanel>
           
-            <ScrollViewer VerticalScrollBarVisibility="Auto" Background="#ED6A5A">
-                <DataGrid AutoGenerateColumns="False" CanUserAddRows="False" CanUserDeleteRows="False" x:Name="CurrencyTable" ItemsSource="{Binding Path=Valute}" Height="368" VerticalAlignment="Stretch"
-                          RowHeight="25" AlternatingRowBackground="#5D576B" RowBackground="#ED6A5A" Foreground="White" Background="#5D576B" BorderThickness="0" GridLinesVisibility="None"
-                          Unloaded="CurrencyTable_Unloaded">
+            <ScrollViewer VerticalScrollBarVisibility="Auto">
+                <DataGrid AutoGenerateColumns="False" CanUserAddRows="False" CanUserDeleteRows="False" x:Name="CurrencyTable" ItemsSource="{Binding Path=Valute}" Height="358" VerticalAlignment="Stretch"
+                          RowHeight="35" AlternatingRowBackground="#5D576B" RowBackground="#ED6A5A" Foreground="White" Background="#111111" BorderThickness="0" GridLinesVisibility="None"
+                          Unloaded="CurrencyTable_Unloaded" IsReadOnly="True" CanUserResizeRows="False">
                     <DataGrid.Resources>
                         <Style TargetType="{x:Type DataGridColumnHeader}">
                             <Setter Property="BorderThickness" Value="0"/>
-                            <Setter Property="Background" Value="#5D576B"/>
                             <Setter Property="Height" Value="30"/>
                         </Style>
                     </DataGrid.Resources>
@@ -34,7 +33,7 @@
                             <DataGridTextColumn.HeaderStyle>
                                 <Style TargetType="DataGridColumnHeader">
                                     <Setter Property="HorizontalContentAlignment" Value="Center" />
-                                    <Setter Property="Background" Value="#5D576B"/>
+                                    <Setter Property="Background" Value="#111111"/>
                                 </Style>
                             </DataGridTextColumn.HeaderStyle>
                         </DataGridTextColumn>
@@ -45,18 +44,7 @@
                             <DataGridTextColumn.HeaderStyle>
                                 <Style TargetType="DataGridColumnHeader">
                                     <Setter Property="HorizontalContentAlignment" Value="Center" />
-                                    <Setter Property="Background" Value="#5D576B"/>
-                                </Style>
-                            </DataGridTextColumn.HeaderStyle>
-                        </DataGridTextColumn>
-                        <DataGridTextColumn Binding="{Binding Nominal}" Width="*">
-                            <DataGridTextColumn.Header>
-                                <TextBlock Text="Номинал" Style="{StaticResource DataGridHeaderText}"/>
-                            </DataGridTextColumn.Header>
-                            <DataGridTextColumn.HeaderStyle>
-                                <Style TargetType="DataGridColumnHeader">
-                                    <Setter Property="HorizontalContentAlignment" Value="Center" />
-                                    <Setter Property="Background" Value="#5D576B"/>
+                                    <Setter Property="Background" Value="#111111"/>
                                 </Style>
                             </DataGridTextColumn.HeaderStyle>
                         </DataGridTextColumn>
@@ -67,7 +55,18 @@
                             <DataGridTextColumn.HeaderStyle>
                                 <Style TargetType="DataGridColumnHeader">
                                     <Setter Property="HorizontalContentAlignment" Value="Center" />
-                                    <Setter Property="Background" Value="#5D576B"/>
+                                    <Setter Property="Background" Value="#111111"/>
+                                </Style>
+                            </DataGridTextColumn.HeaderStyle>
+                        </DataGridTextColumn>
+                        <DataGridTextColumn Binding="{Binding Nominal}" Width="*">
+                            <DataGridTextColumn.Header>
+                                <TextBlock Text="Номинал" Style="{StaticResource DataGridHeaderText}"/>
+                            </DataGridTextColumn.Header>
+                            <DataGridTextColumn.HeaderStyle>
+                                <Style TargetType="DataGridColumnHeader">
+                                    <Setter Property="HorizontalContentAlignment" Value="Center" />
+                                    <Setter Property="Background" Value="#111111"/>
                                 </Style>
                             </DataGridTextColumn.HeaderStyle>
                         </DataGridTextColumn>
@@ -78,7 +77,7 @@
                             <DataGridTextColumn.HeaderStyle>
                                 <Style TargetType="DataGridColumnHeader">
                                     <Setter Property="HorizontalContentAlignment" Value="Center" />
-                                    <Setter Property="Background" Value="#5D576B"/>
+                                    <Setter Property="Background" Value="#111111"/>
                                 </Style>
                             </DataGridTextColumn.HeaderStyle>
                         </DataGridTextColumn>

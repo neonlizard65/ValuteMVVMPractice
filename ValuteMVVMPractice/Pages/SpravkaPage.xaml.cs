@@ -24,7 +24,6 @@ namespace ValuteMVVMPractice.Pages
         public SpravkaPage()
         {
             InitializeComponent();
-            DataContext = MainWindow.cvm;
         }
     }
 }

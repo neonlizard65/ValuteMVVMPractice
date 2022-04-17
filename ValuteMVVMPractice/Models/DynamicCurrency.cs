@@ -106,7 +106,7 @@ namespace ValuteMVVMPractice.Models
         public partial class ValCursRecord
         {
 
-            private byte nominalField;
+            private ushort nominalField;
 
             private string valueField;
 
@@ -115,7 +115,7 @@ namespace ValuteMVVMPractice.Models
             private string idField;
 
             /// <remarks/>
-            public byte Nominal
+            public ushort Nominal
             {
                 get
                 {

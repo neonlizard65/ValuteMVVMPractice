@@ -97,7 +97,7 @@ namespace ValuteMVVMPractice.ViewModels
             }
             set
             {
-                if (Convert.ToDateTime(_valCurs?.DateRange1) != value)
+                if (Convert.ToDateTime(_valCurs?.DateRange1) != value && value < Convert.ToDateTime(_valCurs?.DateRange2))
                 {
                     _valCurs.DateRange1 = value.ToString();
                     OnPropertyChanged("DateRange1");
@@ -112,7 +112,7 @@ namespace ValuteMVVMPractice.ViewModels
             }
             set
             {
-                if (Convert.ToDateTime(_valCurs?.DateRange2) != value)
+                if (Convert.ToDateTime(_valCurs?.DateRange2) != value && value > Convert.ToDateTime(_valCurs?.DateRange1))
                 {
                     _valCurs.DateRange2 = value.ToString();
                     OnPropertyChanged("DateRange2");
@@ -143,7 +143,7 @@ namespace ValuteMVVMPractice.ViewModels
             XmlSerializer xs = new XmlSerializer(typeof(ValCurs));
             HttpClient client = new HttpClient();
             string link = "http://www.cbr.ru/scripts/XML_dynamic.asp?date_req1=" + String.Format("{0:dd/MM/yyyy}", date1) + "&date_req2=" + String.Format("{0:dd/MM/yyyy}", date2) + "&VAL_NM_RQ=" + code;
-            var stream = client.GetAsync(link).Result.Content.ReadAsStreamAsync().Result;
+            var stream = client.GetStreamAsync(link).Result;
             return (ValCurs)xs.Deserialize(stream);
         }
 
@@ -168,7 +168,6 @@ namespace ValuteMVVMPractice.ViewModels
                 Minimum = minValue,
                 Maximum = maxValue,
                 StringFormat = "yyyy-MM-dd",
-                MajorStep = 1,
                 Position = AxisPosition.Bottom,
                 Angle = 45,
                 IsZoomEnabled = true
@@ -195,12 +194,13 @@ namespace ValuteMVVMPractice.ViewModels
                 Key = "y",
                 Position = AxisPosition.Left,
                 Minimum = miny - 2,
-                Maximum = maxy + 2
+                Maximum = maxy + 2,
+                MajorStep = Math.Round(((maxy + 2) - (miny- 2)) / 5)
             };
 
             plotModel = new OxyPlot.PlotModel
             {
-                Title = "График"
+                Title = MainWindow.cvm.Valute.Where(x => x.ID == this.ID).FirstOrDefault().Name
             };
             plotModel.Axes.Add(ay);
             plotModel.Axes.Add(ax);
