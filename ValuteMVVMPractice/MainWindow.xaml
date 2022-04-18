@@ -10,7 +10,7 @@
         MaxHeight="470" MaxWidth="800"
         MinHeight="470" MinWidth="800" WindowStartupLocation="CenterOwner" WindowStyle="SingleBorderWindow">
     <Window.CommandBindings>
-        <CommandBinding Command="ApplicationCommands.Close" x:Name="Close"
+        <CommandBinding Command="ApplicationCommands.Close"
                         Executed="Close_Executed"
                         CanExecute="Close_CanExecute"/>
         <CommandBinding Command="{x:Static customcommand:CustomCommands.MoveToCurrencyTable}"
@@ -25,8 +25,15 @@
         <CommandBinding Command="{x:Static customcommand:CustomCommands.MoveToSpravka}" x:Name="MoveToSpravka"
                         CanExecute="MoveToSpravka_CanExecute"
                         Executed="MoveToSpravka_Executed"/>
-
-
+        <CommandBinding Command="{x:Static customcommand:CustomCommands.ExportToExcel}" x:Name="ExportToExcel"
+                        CanExecute="ExportToExcel_CanExecute"
+                        Executed="ExportToExcel_Executed"/>
+        <CommandBinding Command="{x:Static customcommand:CustomCommands.ExportToPDF}" x:Name="ExportToPDF"
+                        CanExecute="ExportToPDF_CanExecute"
+                        Executed="ExportToPDF_Executed"/>
+        <CommandBinding Command="{x:Static customcommand:CustomCommands.ExportToWord}" x:Name="ExportToWord"
+                        CanExecute="ExportToWord_CanExecute"
+                        Executed="ExportToWord_Executed"/>
     </Window.CommandBindings>
     <Window.InputBindings>
         <KeyBinding Command="ApplicationCommands.Close" Modifiers="Alt" Key="F4"/>
@@ -48,6 +55,11 @@
                 <MenuItem Header="Конвертер валют" Command="{x:Static customcommand:CustomCommands.MoveToConverter}"></MenuItem>
                 <Separator></Separator>
                 <MenuItem Header="Выход" Command="ApplicationCommands.Close" InputGestureText="Esc"></MenuItem>
+            </MenuItem>
+            <MenuItem Header="Экспорт">
+                <MenuItem Header="Экспорт в Excel" Command="{x:Static customcommand:CustomCommands.ExportToExcel}"></MenuItem>
+                <MenuItem Header="Экспорт в PDF" Command="{x:Static customcommand:CustomCommands.ExportToPDF}"></MenuItem>
+                <MenuItem Header="Экспорт в Word" Command="{x:Static customcommand:CustomCommands.ExportToWord}"></MenuItem>
             </MenuItem>
             <MenuItem Header="Справка" Command="{x:Static customcommand:CustomCommands.MoveToSpravka}"></MenuItem>
             <MenuItem Header="Выход" Command="ApplicationCommands.Close" InputGestureText="Esc"></MenuItem>

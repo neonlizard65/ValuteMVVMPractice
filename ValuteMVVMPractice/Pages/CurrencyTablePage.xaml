@@ -26,9 +26,9 @@
                         </Style>
                     </DataGrid.Resources>
                     <DataGrid.Columns>
-                        <DataGridTextColumn Binding="{Binding ID}" Width="*">
+                        <DataGridTextColumn Binding="{Binding NumCode}" Width="*">
                             <DataGridTextColumn.Header>
-                                <TextBlock Text="Название" Style="{StaticResource DataGridHeaderText}"></TextBlock>
+                                <TextBlock Text="ID" Style="{StaticResource DataGridHeaderText}"></TextBlock>
                             </DataGridTextColumn.Header>
                             <DataGridTextColumn.HeaderStyle>
                                 <Style TargetType="DataGridColumnHeader">

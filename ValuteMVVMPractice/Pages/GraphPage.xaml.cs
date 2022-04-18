@@ -24,7 +24,7 @@ namespace ValuteMVVMPractice.Pages
     /// </summary>
     public partial class GraphPage : Page
     {
-        DynamicValCursViewModel dvcvm;
+        public static DynamicValCursViewModel dvcvm;
         public GraphPage()
         {
             InitializeComponent();
@@ -34,21 +34,21 @@ namespace ValuteMVVMPractice.Pages
             ValuteBox.DisplayMemberPath = "CharCode";
             ValuteBox.SelectedValuePath = "ID";
 
-            CurrencyPlot.Model = dvcvm.plotModel;
+            CurrencyPlot.Model = dvcvm.GetPlot();
 
 
         }
 
         private void ValuteBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            CurrencyPlot.Model = dvcvm.plotModel;
+            CurrencyPlot.Model = dvcvm.GetPlot();
         }
 
         private void DatePicker_SelectedDateChanged(object sender, SelectionChangedEventArgs e)
         {
             if (dvcvm.DateRange1 < dvcvm.DateRange2)
             {
-                CurrencyPlot.Model = dvcvm.plotModel;
+                CurrencyPlot.Model = dvcvm.GetPlot();
             }
             else
             {

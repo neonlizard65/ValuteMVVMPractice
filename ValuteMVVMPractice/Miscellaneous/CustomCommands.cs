@@ -14,6 +14,11 @@ namespace ValuteMVVMPractice.Miscellaneous
         public static RoutedCommand MoveToGraph { get; set; }
         public static RoutedCommand MoveToConverter { get; set; }
         public static RoutedCommand MoveToSpravka{ get; set; }
+        public static RoutedCommand ExportToExcel { get; set; }
+        public static RoutedCommand ExportToWord { get; set; }
+        public static RoutedCommand ExportToPDF { get; set; }
+
+
 
 
         static CustomCommands()
@@ -33,6 +38,19 @@ namespace ValuteMVVMPractice.Miscellaneous
             inputs = new InputGestureCollection();
             inputs.Add(new KeyGesture(Key.D4, ModifierKeys.Control, "Ctrl+4"));
             MoveToSpravka = new RoutedCommand("MoveToSpravka", typeof(CustomCommands), inputs);
+
+            inputs = new InputGestureCollection();
+            inputs.Add(new KeyGesture(Key.F1, ModifierKeys.Control, "Ctrl+F1"));
+            ExportToExcel = new RoutedCommand("ExportToExcel", typeof(CustomCommands), inputs);
+
+            inputs = new InputGestureCollection();
+            inputs.Add(new KeyGesture(Key.F2, ModifierKeys.Control, "Ctrl+F2"));
+            ExportToWord = new RoutedCommand("ExportToWord", typeof(CustomCommands), inputs);
+
+            inputs = new InputGestureCollection();
+            inputs.Add(new KeyGesture(Key.F3, ModifierKeys.Control, "Ctrl+F3"));
+            ExportToPDF = new RoutedCommand("ExportToPDF", typeof(CustomCommands), inputs);
+
         }
 
         

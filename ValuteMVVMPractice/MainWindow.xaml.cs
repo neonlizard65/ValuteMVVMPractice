@@ -112,5 +112,66 @@ namespace ValuteMVVMPractice
         {
             MainFrame.Navigate(new SpravkaPage());
         }
+
+        private void ExportToExcel_CanExecute(object sender, CanExecuteRoutedEventArgs e)
+        {
+            e.CanExecute = CanExport();
+        }
+
+        private void ExportToExcel_Executed(object sender, ExecutedRoutedEventArgs e)
+        {
+            if(MainFrame?.Content.GetType() == typeof(CurrencyTablePage))
+            {
+                cvm.ExportToExcel();
+            }
+            else if (MainFrame?.Content.GetType() == typeof(GraphPage))
+            {
+                GraphPage.dvcvm.ExportToExcel();
+            }
+        }
+
+        private void ExportToPDF_CanExecute(object sender, CanExecuteRoutedEventArgs e)
+        {
+            e.CanExecute = CanExport();
+        }
+
+        private void ExportToPDF_Executed(object sender, ExecutedRoutedEventArgs e)
+        {
+            if (MainFrame?.Content.GetType() == typeof(CurrencyTablePage))
+            {
+                cvm.ExportToPDF();
+            }
+            else if (MainFrame?.Content.GetType() == typeof(GraphPage))
+            {
+                GraphPage.dvcvm.ExportToPDF();
+            }
+        }
+
+        private void ExportToWord_CanExecute(object sender, CanExecuteRoutedEventArgs e)
+        {
+            e.CanExecute = CanExport();
+        }
+
+        private void ExportToWord_Executed(object sender, ExecutedRoutedEventArgs e)
+        {
+            if (MainFrame?.Content.GetType() == typeof(CurrencyTablePage))
+            {
+                cvm.ExportToWord();
+            }
+            else if (MainFrame?.Content.GetType() == typeof(GraphPage))
+            {
+                GraphPage.dvcvm.ExportToWord();
+            }
+        }
+
+        private bool CanExport()
+        {
+            if (MainFrame?.Content.GetType() == typeof(CurrencyTablePage) || MainFrame?.Content.GetType() == typeof(GraphPage))
+            {
+                return true;
+            }
+            return false;
+        }
+
     }
 }
