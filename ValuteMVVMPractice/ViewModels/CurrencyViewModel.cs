@@ -132,7 +132,7 @@ namespace ValuteMVVMPractice.ViewModels
         //Конвертация валют
         public decimal GetConversion(decimal quantity, ValCursValuteViewModel val1, ValCursValuteViewModel val2)
         {
-            var answer = (Convert.ToDecimal(val1.Value) * quantity / val1.Nominal) / (Convert.ToDecimal(val2.Value));
+            var answer = (Convert.ToDecimal(val1.Value)* quantity / val1.Nominal) / ((Convert.ToDecimal(val2.Value) / val2.Nominal));
             return (decimal)answer;
         }
 
